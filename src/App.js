@@ -25,52 +25,88 @@ function App() {
     }
   ])
   const [cart, setcart] = useState([]);
+  const [counter, setcounter] = useState(0);
   function addtocart(product) {
 
 
-     var result =cart.find((cart)=>cart.id === product.id);
+    var result = cart.find((cart) => cart.id === product.id);
 
-     if(result === undefined){
-       setcart([...cart,product])
-     }else{
-       alert("Order Already Exsist")
-     }
-    // setproducts( products )
-    // setcart([products[index]])
-    // return console.log(cart)
-    // console.log([products[index]])
+    if (result === undefined) {
+      setcart([...cart, product])
+    } else {
+      alert("Order Already Exsist")
+    }
+
+   
+      // setproducts( products )
+      // setcart([products[index]])
+      // return console.log(cart)
+      // console.log([products[index]])
+    }
+
+  
+  function add(value) {
+    var increament = cart.find((product) => product.id === value.id);
+    if(increament){
+      setcounter(function (pre) {
+        return pre + 1;
+      
+    })
+  }
+}
+  function minus() {
+    setcounter(function (prev) {
+      return prev - 1
+    })
+  }
+    return (<>
+      <div className="App">
+
+
+        <div className="app1">
+          {products.map((product, index) => (
+
+            <div key={index} >
+              {console.log("index", index), console.log("product", product)}
+              <img src={product.img} width="250px" />
+              <p>Title: {product.title}</p>
+              <p>Price: {product.price}</p>
+              <button onClick={() => addtocart(product)}>Add to cart</button>
+            &ensp;
+            </div>
+          ))}
+        </div>
+
+        <div className="app2" >
+          <h1 id="cart">Add To Cart</h1>
+          {cart.length === 0 ? <div>cart is empty</div> :
+            <>
+              {cart.map((value, index) => (
+                <div key={index}>
+                  <img src={value.img} width="250px" />
+                  <p>Title: {value.title}</p>
+                  <p>Price: {value.price}</p>
+                  {/* <p>P: {value.price}</p> */}
+                  <button onClick={()=>add(value)}>+</button>
+            &ensp;
+            &ensp;
+                  <span id="result">{counter}</span>
+            &ensp;
+            &ensp;
+                  <button onClick={()=>minus(value)}>-</button>
+                </div>
+
+              ))}
+            </>
+          }
+        </div>
+
+
+
+
+      </div>
+    </>);
+
   }
 
-
-  return (<>
-    <div className="App">
-      <div>
-        {products.map((product, index) => (
-          
-          <div key={index} >
-            {console.log("index",index),console.log("product",product)}
-            <img src={product.img} width="250px" />
-            <p>Title: {product.title}</p>
-            <p>Price: {product.price}</p>
-            <button onClick={() => addtocart(product)}>Add to cart</button>
-            &ensp;
-          </div>
-        ))}
-      </div>
-
-      <div>
-        {cart.map((value, index) => (
-          <div key={index}>
-            <h1>Add To Cart</h1>
-            <img src={value.img} width="250px" />
-            <p>Title: {value.title}</p>
-            <p>Price: {value.price}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </>);
-
-}
-
-export default App;
+  export default App;

@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+ width: 100%;
+}
+.app1{
+  width: 50%;
+  float: left;
+}
+
+.app2{
+width: 50%;
+float: right;
 }
 
 .App-logo {
